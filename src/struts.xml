@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN "
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+<constant name="struts.ui.theme" value="simple" />
+<package extends="struts-default" namespace="/" name="d3Test">
+		<action name="D3Action" class="action.D3Action" method="execute">
+			<result name="success">d3Test.jsp</result>
+			<result name="error">d3Test.jsp</result>
+		</action>
+</package>
+</struts>
