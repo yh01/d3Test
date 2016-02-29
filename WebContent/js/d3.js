@@ -106,7 +106,7 @@ jQuery(function($) {
 								y : function(d, i) {
 									return i * 35 + 15;
 								},
-								fill : "black"
+								fill : "b"
 							}).text(function(d) {
 								return d.goodsName;
 							});
@@ -116,7 +116,7 @@ jQuery(function($) {
 											"mouseover",
 											function(d) {
 												d3.select(this).attr("fill",
-														"orange");
+														"blue");
 											}).on("mouseout", function(d) {
 										d3.select(this).attr("fill", "blue");
 									}).on(

@@ -34,8 +34,8 @@ nv.addGraph(function() {
 	function DataSet() {
 	  return {
 	  	"title":"総在庫数",		//Label the bullet chart
-	  	"ranges":[0,250,500],	 //Minimum, mean and maximum values.
-	  	"measures":[500],		 //Value representing current measurement (the thick blue line in the example)
+	  	"ranges":[0,test2,test3],	 //Minimum, mean and maximum values.
+	  	"measures":[test3],		 //Value representing current measurement (the thick blue line in the example)
 	  	"markers":[test1,test2,test3]			 //Place a marker on the chart (the white triangle marker)
 	  };
 	}

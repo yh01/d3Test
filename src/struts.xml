@@ -22,5 +22,15 @@
                 <param name="root">false</param>
             </result>
         </action>
+
+        <!--D3の表示をするアクション -->
+         <action name="salesList" class="action.ShowGraphAction" method="execute">
+			<result name="success" type="json">
+				<param name="root">ShowGraphList</param>
+			</result>
+			<result name="error" type="json">
+				<param name="root">false</param>
+			</result>
+		</action>
 </package>
 </struts>

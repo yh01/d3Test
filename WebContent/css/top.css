@@ -1,0 +1,14 @@
+
+path {
+      fill: none;
+      stroke: #000;
+      stroke-width: 1px;
+      shape-rendering: crispEdges;
+}
+
+text{
+	font-size: 20px;
+}
+#D3Graph{
+	text-align:center;
+}
