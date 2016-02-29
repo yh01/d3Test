@@ -4,9 +4,23 @@
 <struts>
 <constant name="struts.ui.theme" value="simple" />
 <package extends="struts-default" namespace="/" name="d3Test">
+	<result-types>
+        <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+    </result-types>
 		<action name="D3Action" class="action.D3Action" method="execute">
 			<result name="success">d3Test.jsp</result>
 			<result name="error">d3Test.jsp</result>
 		</action>
+
+    <!--売上検索 -->
+        <action name="AdminCapacitySearchAction"
+            class="action.AdminCapacitySearchAction" method="execute">
+            <result name="success" type="json">
+                <param name="root">searchList</param>
+            </result>
+            <result name="error" type="json">
+                <param name="root">false</param>
+            </result>
+        </action>
 </package>
 </struts>
