@@ -18,13 +18,13 @@ public class D3SelectListDAO {
 	public List<D3SelectListDTO> D3GraphList = new ArrayList<D3SelectListDTO>();
 	D3SelectListDTO dto = new D3SelectListDTO();
 
-	public boolean select() throws SQLException{
+	public boolean select(){
 		boolean result = true;
 		D3DBConnector dbConnection = new D3DBConnector();
 		Connection con = dbConnection.getConnection("d3SelectListTest");
 
 		try{
-			String sql = "SELECT itemName,salesAmount from d3select ORDER BY salesAmount DESC LIMIT 3";
+			String sql = "SELECT itemName,salesAmount from d3select ORDER BY id";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rSet = ps.executeQuery();
 

@@ -1,6 +1,5 @@
 package action;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import dto.D3SelectListDTO;
 
 public class D3SelectListAction extends ActionSupport{
 	public List<D3SelectListDTO> D3GraphList = new ArrayList<D3SelectListDTO>();
-	public String execute() throws SQLException{
+	public String execute(){
 		D3SelectListDAO dao = new D3SelectListDAO();
 		String result = SUCCESS;
 		if(!dao.select()){

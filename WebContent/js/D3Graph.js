@@ -13,9 +13,10 @@ $.ajax({
 			for(i=0;i<data.length;i++){
 				dataSet[i] = {name:data[i].itemName, val:data[i].salesAmount};
 			}
-            //svg領域の指定
+			console.log(data);
+			//svg領域の指定
 			var size = $(window).width() * 0.4;
-			var margin = {top: 20 , right: 250, left:  0, bottom: 20}
+			var margin = {top: 20 , right: 0, left:  0, bottom: 20}
 			var svgH = (25 * (data.length + 7)) - margin.top - margin.bottom;
 			var svgW = size - margin.left - margin.right;
 			var Margin = 0;
@@ -40,10 +41,10 @@ $.ajax({
 			         .enter()
 			         .append("rect")
 			         .attr({
-							x: function(d)  { return  svgH-((d.val * 5))},//function(d,i){return i * 50 + Margin}
-							y: function(d,i){return i * 50 + Margin},//function(d)  { return  svgH-((d.val * 5))}
-							width: function(d){ return yscale(d.val)},//30
-							height :30,//function(d){ return yscale(d.val)}
+							x: function(d,i){return i * 50 + Margin},//function(d,i){return i * 50 + Margin}
+							y: function(d)  { return  svgH-((d.val * 5))},//function(d)  { return  svgH-((d.val * 5))}
+							width:30,//30
+							height :function(d){ return yscale(d.val)},//function(d){ return yscale(d.val)}
 							fill: "blue"
 			         });
 
@@ -55,8 +56,8 @@ $.ajax({
 					.append("text")
 					.text(function(d){return d.val})
 					.attr({
-						x: 50,//function(d,i){return i * (svgH / dataSet.length)}
-						y: function(d,i){return i * (svgH / dataSet.length)},//50
+						x: function(d,i){return i * (svgH / dataSet.length)},//function(d,i){return i * (svgH / dataSet.length)}
+						y: 50,//50
 						fill:"black",
 					});
 
@@ -68,8 +69,8 @@ $.ajax({
 					.append("text")
 					.text(function(d){return d.name})
 					.attr({
-						x: function(d,i){return i * 50 + Margin + 25},//Margin
-						y: Margin,//function(d,i){return i * 50 + Margin + 25}
+						x: Margin,//Margin
+						y: function(d,i){return i * 50 + Margin + 25},//function(d,i){return i * 50 + Margin + 25}
 						fill:"white",
 					})
 					.attr("transform", function(d,i){
