@@ -5,9 +5,6 @@ jQuery(function($) {
 	var url = location.protocol;
 	url += "/d3Test/D3GraphList";
 	var dataSet= [];
-	var w = 500;
-	var h = 240;
-	var padding= 20;
 	getSalesGraph();
 
 function getSalesGraph() {
@@ -20,49 +17,68 @@ $.ajax({
 				dataSet[i] = {name:data[i].itemName, val:data[i].salesAmount};
 			}
 			console.log(data);
-
 			//svg領域の指定
-
+			var size = $(window).width() * 0.5;
+			var margin = {top: 0 , right: 0, left:  0, bottom: 0}
+			var svgH = (30 * (data.length + dataSet.length));
+			var svgW = size - margin.left - margin.right;
+			var Margin = 0;
+			var svg = d3.select("#graphLine")
+			            .append('svg')
+				        .attr({
+				    	       height: svgH,
+				               width:  svgW
+                     });
 
             //スケールの指定
-			var xScale = d3.scale.linear()
-			.domain([0,d3.max(dataSet,function(d){
-				return d.val
-			})])
-			.range([padding, w - padding])
-			.nice();
+			var xscale = d3.scale.linear()
+				.domain([0,d3.max(dataSet,function(d){ return d.name})])
+				.range([100, svgH]);
+		    var yscale = d3.scale.linear()
+				.domain([0,(d3.max(dataSet,function(d){ return d.val}) + Margin)])
+				.range([0, svgW - (margin.left + Margin)]);
 
             //棒グラフの生成
-			svg.selectAll("rect")
-			.d3.select("#graphLine")
-            .data(dataSet)
-            .enter()
-            .append("rect")
-            .on("mouseover", function(d) {
-                d3.select(this).attr("fill", "orange");
-            })
-            .on("mouseout", function(d) {
-                d3.select(this).attr("fill", "blue");
-            })
-            .on("click", function(d) {
-                var rs = d3.select(this).attr("r");
-                alert(rs);
-            })
-            .attr({
-                x: padding,
-                y: function(d, i) { return 50 + (i * 25); },
-                r : function(d) { return d; },
-                width : function(d) { return xScale(d) - padding; },
-                height: 20,
-                fill: "blue"
-            });
-
+			var barchart = svg.selectAll("rect")
+			         .data(dataSet)
+			         .enter()
+			         .append("rect")
+			         .attr({
+							x: function(d)  {return  svgW - ((d.val * 5))},//function(d,i){return i * 50 + Margin}
+							y: function(d,i){return i * 50 + Margin},//function(d)  { return  svgH-((d.val * 5))}
+							width:function(d){ return yscale(d.val)},//30
+							height :30,//function(d){ return yscale(d.val)}
+							fill: "blue"
+			         });
 
 			// 売り上げ記載
-
+			svg.selectAll("text")
+					.attr("class","yAxis")//xAxis
+					.data(dataSet)
+					.enter()
+					.append("text")
+					.text(function(d){return d.val})
+					.attr({
+						x: 10,//function(d,i){return i * (svgH / dataSet.length)}
+						y: function(d,i){return i * (svgH / dataSet.length)},//50
+						fill:"black",
+					});
 
 			// 商品の名前の記載
-
+			svg.selectAll("text2")
+					.attr("class","yAxis")
+					.data(dataSet)
+					.enter()
+					.append("text")
+					.text(function(d){return d.name})
+					.attr({
+						x: Margin,//Margin
+						y: function(d,i){return i * 50 + Margin },//function(d,i){return i * 50 + Margin + 25}
+						fill:"black",
+					})
+					.attr("transform", function(d,i){
+						return "translate("+ 1 +"," + svgH + ")rotate(-90)";
+					});
 		});
 	};
 });
