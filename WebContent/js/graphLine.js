@@ -16,13 +16,10 @@ $.ajax({
 			for(i=0;i<data.length;i++){
 				dataSet[i] = {name:data[i].itemName, val:data[i].salesAmount};
 			}
-			console.log(data);
+			console.log(dataSet);
 			//svg領域の指定
-			var size = $(window).width() * 0.5;
-			var margin = {top: 0 , right: 0, left:  0, bottom: 0}
-			var svgH = (30 * (data.length + dataSet.length));
-			var svgW = size - margin.left - margin.right;
-			var Margin = 0;
+			var svgH =520;
+			var svgW =240;
 			var svg = d3.select("#graphLine")
 			            .append('svg')
 				        .attr({
@@ -31,12 +28,9 @@ $.ajax({
                      });
 
             //スケールの指定
-			var xscale = d3.scale.linear()
-				.domain([0,d3.max(dataSet,function(d){ return d.name})])
-				.range([100, svgH]);
-		    var yscale = d3.scale.linear()
-				.domain([0,(d3.max(dataSet,function(d){ return d.val}) + Margin)])
-				.range([0, svgW - (margin.left + Margin)]);
+			var xScale = d3.scale.linear()
+				.domain([0,d3.max(dataSet,function(d){ return d.val})])
+				.range([0,svgW]);
 
             //棒グラフの生成
 			var barchart = svg.selectAll("rect")
@@ -44,23 +38,26 @@ $.ajax({
 			         .enter()
 			         .append("rect")
 			         .attr({
-							x: function(d)  {return  svgW - ((d.val * 5))},//function(d,i){return i * 50 + Margin}
-							y: function(d,i){return i * 50 + Margin},//function(d)  { return  svgH-((d.val * 5))}
-							width:function(d){ return yscale(d.val)},//30
-							height :30,//function(d){ return yscale(d.val)}
+							x: 0,//function(d,i){return i * 50 + Margin}
+							y: function(d,i)  {return d.val + (i * dataSet.length)},//function(d)  { return  svgH-((d.val * 5))}
+							width:function(d,i){ return i * dataSet.length},//30
+							height :10,//function(d){ return yscale(d.val)}
 							fill: "blue"
+			         })
+			         .on("click", function(d) {
+			        	 alert(d.val);
 			         });
 
+
 			// 売り上げ記載
-			svg.selectAll("text")
-					.attr("class","yAxis")//xAxis
+			svg.selectAll("text")//xAxis
 					.data(dataSet)
 					.enter()
 					.append("text")
 					.text(function(d){return d.val})
 					.attr({
-						x: 10,//function(d,i){return i * (svgH / dataSet.length)}
-						y: function(d,i){return i * (svgH / dataSet.length)},//50
+						x: 2,//function(d,i){return i * (svgH / dataSet.length)}
+						y: function(d,i){return i * dataSet.length+50},//50
 						fill:"black",
 					});
 
@@ -72,8 +69,8 @@ $.ajax({
 					.append("text")
 					.text(function(d){return d.name})
 					.attr({
-						x: Margin,//Margin
-						y: function(d,i){return i * 50 + Margin },//function(d,i){return i * 50 + Margin + 25}
+						x: 0,//Margin
+						y: function(d,i){return i * 50},//function(d,i){return i * 50 + Margin + 25}
 						fill:"black",
 					})
 					.attr("transform", function(d,i){
