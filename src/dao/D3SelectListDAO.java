@@ -30,7 +30,7 @@ public class D3SelectListDAO {
 
 			while(rSet.next()){
 				D3SelectListDTO dto = new D3SelectListDTO();
-				dto.setItenName(rSet.getString(1));
+				dto.setItemName(rSet.getString(1));
 				dto.setSalesAmount(rSet.getInt(2));
 				D3GraphList.add(dto);
 			}

@@ -46,6 +46,9 @@ $.ajax({
 							width:30,//30
 							height :function(d){ return yscale(d.val)},//function(d){ return yscale(d.val)}
 							fill: "blue"
+			         })
+			         .on("click", function(d) {
+			        	 alert(d.name);
 			         });
 
 			// 売り上げ記載

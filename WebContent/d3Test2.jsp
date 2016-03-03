@@ -20,14 +20,8 @@
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/D3Graph.js"></script>
 <script type="text/javascript" src="js/graphLine.js"></script>
-<style>
-	#padding{
-		padding:200px;
-	}
-</style>
 </head>
 <body>
-<div id = "padding"></div>
 <div id = "graphLine"></div>
 </body>
 </html>

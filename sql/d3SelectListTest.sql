@@ -17,3 +17,6 @@ insert into d3select(itemName,salesAmount)values("test7",46);
 insert into d3select(itemName,salesAmount)values("test8",20);
 insert into d3select(itemName,salesAmount)values("test9",70);
 insert into d3select(itemName,salesAmount)values("test10",30);
+insert into d3select(itemName,salesAmount)values("test11",300);
+insert into d3select(itemName,salesAmount)values("test12",60);
+insert into d3select(itemName,salesAmount)values("test13",80);

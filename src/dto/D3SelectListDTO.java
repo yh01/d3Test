@@ -1,13 +1,13 @@
 package dto;
 
 public class D3SelectListDTO {
-	private String itenName;
+	private String itemName;
 	private int salesAmount;
-	public String getItenName() {
-		return itenName;
+	public String getItemName() {
+		return itemName;
 	}
-	public void setItenName(String itenName) {
-		this.itenName = itenName;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 	public int getSalesAmount() {
 		return salesAmount;
